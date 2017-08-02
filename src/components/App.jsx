@@ -1,12 +1,12 @@
-import React, {PropTypes} from 'react';
+import React, { PropTypes } from 'react';
 
 import {
-	Framework7App, Statusbar, Panel, View, Navbar, Pages, Page, ContentBlock, ContentBlockTitle, 
+	Framework7App, Statusbar, Panel, View, Navbar, Pages, Page, ContentBlock, ContentBlockTitle,
 	List, ListItem, Views, NavLeft, Link, NavCenter, NavRight, GridRow, GridCol, Button, Popup,
 	LoginScreen, LoginScreenTitle, ListButton, ListLabel, FormLabel, FormInput
 } from 'framework7-react';
 
-import {routes} from '../routes';
+import { routes } from '../routes';
 
 const LeftPanel = (props, context) => (
 	<Panel left reveal layout="dark">
@@ -80,7 +80,7 @@ const MainViews = (props, context) => {
 						</NavLeft>
 						<NavCenter sliding>Framework7</NavCenter>
 						<NavRight>
-							<Link icon="icon-bars" openPanel="right"></Link>
+							{/*<Link icon="icon-bars" openPanel="right"></Link>*/}
 						</NavRight>
 					</Navbar>
 				) : null}
@@ -97,7 +97,7 @@ const MainViews = (props, context) => {
 									<Link icon="icon-bars" openPanel="right"></Link>
 								</NavRight>
 							</Navbar>
-						) : null}						
+						) : null}
 						<ContentBlockTitle>Welcome to my App</ContentBlockTitle>
 						<ContentBlock inner>
 							<p>Duis sed erat ac eros ultrices pharetra id ut tellus. Praesent rhoncus enim ornare ipsum aliquet ultricies. Pellentesque sodales erat quis elementum sagittis.</p>
@@ -105,7 +105,7 @@ const MainViews = (props, context) => {
 						<ContentBlockTitle>Navigation</ContentBlockTitle>
 						<List>
 							<ListItem link="/about/" title="About"></ListItem>
-							<ListItem link="/form/" title="Form"></ListItem>							
+							<ListItem link="/form/" title="Form"></ListItem>
 						</List>
 						<ContentBlockTitle>Side Panels</ContentBlockTitle>
 						<ContentBlock>
@@ -154,7 +154,7 @@ const AppPopup = () => (
 				</Page>
 			</Pages>
 		</View>
-	</Popup> 
+	</Popup>
 );
 
 const AppLoginScreen = () => (
@@ -185,14 +185,14 @@ const AppLoginScreen = () => (
 	</LoginScreen>
 );
 
-export const App = () => (	
+export const App = () => (
 	//Change themeType to "material" to use the Material theme
-	<Framework7App themeType="ios" routes={routes}>		
-		<Statusbar />		
+	<Framework7App themeType="ios" routes={routes}>
+		<Statusbar />
 		<LeftPanel />
 		<RightPanel />
 		<MainViews />
 		<AppPopup />
 		<AppLoginScreen />
-	</Framework7App>  
+	</Framework7App>
 );

@@ -5,22 +5,64 @@ import {
     Views,
     View,
     Statusbar,
-    Navbar,
+    Navbar, NavLeft, NavCenter, NavRight,
     Pages,
     Page,
-    ContentBlock
+    ContentBlock, ContentBlockTitle,
+    Link,
+    List, ListItem,
+    Panel
 } from 'framework7-react';
 
 import { routes } from '../routes';
 
-import { About } from './pages/About';
+import { KitchenSink } from './pages/KitchenSink';
+//import { About } from './pages/About';
+
+const LeftPanel = (props, context) => (
+    <Panel left reveal layout="dark">
+        <View id="left-panel-view" navbarThrough dynamicNavbar="true">
+            {/*context.framework7AppContext.theme.ios ? <Navbar title="Left Panel"></Navbar> : null*/}
+            <Navbar title="Left Panel"></Navbar>
+            <Pages>
+                <Page>
+                    {/*context.framework7AppContext.theme.material ? <Navbar title="Left Panel"></Navbar> : null*/}
+                    <Navbar title="Left Panel"></Navbar>
+                    <ContentBlock inner>
+                        <p>Left panel content goes here</p>
+                    </ContentBlock>
+                    <ContentBlockTitle>Load page in panel</ContentBlockTitle>
+                    <List>
+                        <ListItem link="/about/" title="About"></ListItem>
+                        <ListItem link="/form/" title="Form"></ListItem>
+                    </List>
+                    <ContentBlockTitle>Load page in main view</ContentBlockTitle>
+                    <List>
+                        <ListItem link="/about/" title="About" linkView="#main-view" linkClosePanel></ListItem>
+                        <ListItem link="/form/" title="Form" linkView="#main-view" linkClosePanel></ListItem>
+                    </List>
+                </Page>
+            </Pages>
+        </View>
+    </Panel>
+);
+LeftPanel.propTypes = {
+    framework7AppContext: PropTypes.object
+};
 
 const MainViews = (props, context) => {
     return (
         <Views>
             <View id="main-view" navbarThrough dynamicNavbar={true} main url="/">
+                <Navbar>
+                    <NavLeft>
+                        <Link icon="icon-bars" openPanel="left" />
+                    </NavLeft>
+                    <NavCenter sliding>KitchenSink</NavCenter>
+                </Navbar>
                 <Pages>
-                    <About />
+                    {/*Default or Home page*/}
+                    <KitchenSink />
                 </Pages>
             </View>
         </Views>
@@ -45,6 +87,7 @@ export const ReactSemanticExample = () => (
         onRouteChange={(route) => currentRoute = route}
         routes={routes}>
         <Statusbar />
+        <LeftPanel />
         <MainViews />
     </Framework7App>
 );
