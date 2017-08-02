@@ -8,8 +8,11 @@ const options = [
     { key: 'f', text: 'Female', value: 'female' },
 ];
 
-class SemanticUIFormView extends React.Component {
+export default class SemanticFormView extends React.Component {
     state = {};
+
+    handleChange = (e, { value }) => this.setState({ value });
+
     render() {
         const { value } = this.state;
         return (
@@ -33,4 +36,4 @@ class SemanticUIFormView extends React.Component {
     }
 };
 
-export const SemanticForm = SemanticUIFormView;
+export const SemanticForm = SemanticFormView;

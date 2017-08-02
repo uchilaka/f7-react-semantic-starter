@@ -5,7 +5,6 @@ Your custom styles go here
   padding: 0;
 }
 .content-block .content-block-inner {
-  /* defualt is: content-box */
-  /*box-sizing: border-box;*/
+  /* default `box-sizing` is: content-box */
   margin-left: 0px;
 }

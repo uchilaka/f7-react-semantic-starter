@@ -11,6 +11,8 @@ import {
 class LeftPanelView extends React.Component {
     constructor(props, context) {
         super(props, context);
+        console.info('Props -> %o', props);
+        console.info('Context -> %o', context);
     }
     render() {
         return (
@@ -34,6 +36,8 @@ class LeftPanelView extends React.Component {
                             <List>
                                 <ListItem link="/about/" title="About" linkView="#main-view" linkClosePanel></ListItem>
                                 <ListItem link="/form/" title="Form" linkView="#main-view" linkClosePanel></ListItem>
+                                <ListItem link="/semantic-kitchen-sink/" title="Semantic Kitchen Sink" linkView="#main-view" linkClosePanel></ListItem>
+                                <ListItem link="/semantic-form/" title="Semantic Form" linkView="#main-view" linkClosePanel></ListItem>
                             </List>
                         </Page>
                     </Pages>
