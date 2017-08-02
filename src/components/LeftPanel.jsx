@@ -38,6 +38,7 @@ class LeftPanelView extends React.Component {
                                 <ListItem link="/form/" title="Form" linkView="#main-view" linkClosePanel></ListItem>
                                 <ListItem link="/semantic-kitchen-sink/" title="Semantic Kitchen Sink" linkView="#main-view" linkClosePanel></ListItem>
                                 <ListItem link="/semantic-form/" title="Semantic Form" linkView="#main-view" linkClosePanel></ListItem>
+                                <ListItem link="/home/" title="Home" linkView="#main-view" linkClosePanel></ListItem>
                             </List>
                         </Page>
                     </Pages>

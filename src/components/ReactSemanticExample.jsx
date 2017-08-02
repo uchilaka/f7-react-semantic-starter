@@ -5,18 +5,20 @@ import {
     Views,
     View,
     Statusbar,
-    Navbar, NavLeft, NavCenter, NavRight,
+    Navbar, NavLeft, NavCenter,
+    //NavRight,
     Pages,
-    Page,
-    ContentBlock, ContentBlockTitle,
+    //Page,
+    //ContentBlock, ContentBlockTitle,
     Link,
-    List, ListItem,
-    Panel
+    //List, ListItem,
+    //Panel
 } from 'framework7-react';
 
 import { routes } from '../routes';
 
-import { KitchenSink } from './pages/KitchenSink';
+import { Home } from './pages/Home';
+//import { KitchenSink } from './pages/KitchenSink';
 //import { About } from './pages/About';
 import 'semantic-ui-css/semantic.min.css';
 
@@ -34,11 +36,15 @@ const MainViews = (props, context) => {
                 </Navbar>
                 <Pages>
                     {/*Default or Home page*/}
-                    <KitchenSink />
+                    <Home />
                 </Pages>
             </View>
         </Views>
     );
+};
+
+MainViews.contextTypes = {
+    framework7AppContext: PropTypes.object
 };
 
 let framework7;

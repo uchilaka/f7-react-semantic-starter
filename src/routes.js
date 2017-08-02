@@ -3,6 +3,7 @@ import { Form } from './components/pages/Form';
 import { KitchenSink } from './components/pages/KitchenSink';
 import { SemanticKitchenSink } from './components/pages/SemanticKitchenSink';
 import { SemanticForm } from './components/pages/SemanticForm';
+import { Home } from './components/pages/Home';
 
 export const routes = [
     {
@@ -20,5 +21,8 @@ export const routes = [
     }, {
         path: '/semantic-form/',
         component: SemanticForm
+    }, {
+        path: '/home/',
+        component: Home
     }
 ];

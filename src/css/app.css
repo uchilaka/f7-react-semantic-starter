@@ -8,3 +8,6 @@ Your custom styles go here
   /* default `box-sizing` is: content-box */
   margin-left: 0px;
 }
+.button {
+  height: unset;
+}

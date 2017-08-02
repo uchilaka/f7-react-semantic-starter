@@ -1,4 +1,4 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
 import {
     Page,
     Navbar,
@@ -22,6 +22,9 @@ export default class KitchenSinkView extends React.Component {
                 <ContentBlockTitle>This is a section title</ContentBlockTitle>
                 <ContentBlock inner>
                     This is some content to go here. Hello world!
+                </ContentBlock>
+                <ContentBlockTitle>Buttons</ContentBlockTitle>
+                <ContentBlock inner>
                 </ContentBlock>
             </Page>
         );

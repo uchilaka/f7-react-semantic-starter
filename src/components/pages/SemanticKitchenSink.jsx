@@ -1,4 +1,4 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
 import {
     Page,
     Navbar,
@@ -13,7 +13,7 @@ import {
     Header
 } from 'semantic-ui-react';
 
-export default class SemanticKitchenSinkView extends React.Component {
+class SemanticKitchenSinkView extends React.Component {
     render() {
         return (
             <Page>
