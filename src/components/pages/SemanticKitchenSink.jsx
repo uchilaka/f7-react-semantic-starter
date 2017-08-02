@@ -17,21 +17,22 @@ import {
 class SemanticKitchenSinkView extends React.Component {
     constructor(props, context) {
         super(props, context);
+        //this.renderButton = this.renderButton.bind(this);
+        //this.renderButtonBlockByStyleKey = this.renderButtonBlockByStyleKey.bind(this);
+
         this.state = {
             colorHistory: [],
             colors: 'red orange yellow olive green teal blue violet purple pink brown grey black facebook instagram linkedin twitter vk youtube'.split(' '),
             buttons: {
                 sizes: 'mini tiny small medium large big huge massive'.split(' ')
             },
-            buttonsToRender: {
-                basic: [],
-                fluid: [],
-                default: []
-            }
+            buttonsToRender: {}
         };
         this.state.colors.push('google plus');
+    }
+
+    componentDidMount() {
         // build buttons 
-        let buttonStyles = Object.keys(this.state.buttonsToRender);
         let colorHistory = [];
         const _c = this;
 
@@ -54,9 +55,16 @@ class SemanticKitchenSinkView extends React.Component {
             return pickedColor;
         };
 
-        let buildButtonJobs = [];
+        //let buildButtonJobs = [];
+        let buttonsToRender = {
+            basic: [],
+            fluid: [],
+            default: []
+        };
+        let buttonStyles = Object.keys(buttonsToRender);
 
         buttonStyles.forEach((style) => {
+            /*
             buildButtonJobs.push(new Promise((yep, nope) => {
                 // go through button sizes and colors 
                 this.state.buttons.sizes.forEach((buttonSize, at) => {
@@ -67,16 +75,40 @@ class SemanticKitchenSinkView extends React.Component {
                     };
                     newButton[style] = true;
                     // add button
-                    this.state.buttonsToRender[style].push(newButton);
+                    buttonsToRender[style].push(newButton);
                     return yep(newButton);
                 });
             }));
+            */
+            // go through button sizes and colors 
+            this.state.buttons.sizes.forEach((buttonSize, at) => {
+                const newButton = {
+                    key: at + 1,
+                    size: buttonSize,
+                    color: pickRandomizedUniqueIn10SampleColor()
+                };
+                newButton[style] = true;
+                // add button
+                buttonsToRender[style].push(newButton);
+                //return yep(newButton);
+            });
         });
+        /*
         Promise.all(buildButtonJobs)
             .then(() => {
                 console.info('Color history -> %o', colorHistory);
-                console.info('Built buttons -> %o', this.state.buttonsToRender);
+                console.info('Built buttons -> %o', buttonsToRender);
+                // update state
+                this.setState({
+                    buttonsToRender: buttonsToRender
+                });
             });
+        */
+        console.info('Color history -> %o', colorHistory);
+        console.info('Built buttons -> %o', buttonsToRender);
+        this.setState({
+            buttonsToRender: buttonsToRender
+        });
     }
 
     getRandomColor() {
@@ -100,12 +132,37 @@ class SemanticKitchenSinkView extends React.Component {
     }
     */
     renderButton(color, size, attrs) {
+        if (!attrs.key) attrs.key = (new Date()).getTime();
         return (
-            <Button {...attrs}>{color.toUpperCase()} {size} button</Button>
+            <div key={`button-${attrs.key}`}><Button {...attrs}>{color.toUpperCase()} {size} button</Button></div>
         );
     }
 
+
+
+    renderButtonBlockByStyleKey(styleKey) {
+        //console.info('Will render button block: %s', styleKey);
+        return (
+            <ContentBlock key={styleKey}>
+                <ContentBlockTitle>(PROGRAMMATIC) {styleKey.toUpperCase()} BUTTONS</ContentBlockTitle>
+                <ContentBlock inner>
+                    {this.state.buttonsToRender[styleKey].map((attrs, at) => {
+                        //console.info('Button attrs -> %o', attrs);
+                        //if (!attrs.key) attrs.key = (new Date()).getTime();
+                        return (<div key={`btn-${attrs.key}`}><Button {...attrs}>{attrs.color.toUpperCase()} {attrs.size} button</Button></div>)
+                    })}
+                </ContentBlock>
+            </ContentBlock>
+        );
+    }
+
+    componentWillUpdate() {
+        console.info(':componentWillUpdate()');
+    }
+
     render() {
+        const buttonStyleKeys = Object.keys(this.state.buttonsToRender);
+        console.info('Style keys -> %o', buttonStyleKeys);
         return (
             <Page>
                 <Navbar title="Semantic UI KitchenSink" backLink="Back" sliding />
@@ -124,32 +181,8 @@ class SemanticKitchenSinkView extends React.Component {
                     This is some text, just in a container
                 </Container>
 
-                <ContentBlockTitle>Basic Buttons</ContentBlockTitle>
-                <ContentBlock inner>
-                    {/*Basic buttons*/}
-                    {this.state.buttons.sizes.map((buttonSize, at) => {
-                        const attrs = { basic: true, key: at + 1, size: buttonSize, color: this.getRandomColor() };
-                        return <div key={attrs.key}>{this.renderButton(attrs.color, buttonSize, attrs)}</div>
-                    })}
-                </ContentBlock>
+                {buttonStyleKeys.map((styleKey, at) => this.renderButtonBlockByStyleKey(styleKey))}
 
-                <ContentBlockTitle>Default Buttons</ContentBlockTitle>
-                <ContentBlock inner>
-                    {/*Default buttons*/}
-                    {this.state.buttons.sizes.map((buttonSize, at) => {
-                        const attrs = { key: at + 1, size: buttonSize, color: this.getRandomColor() };
-                        return <div key={attrs.key}>{this.renderButton(attrs.color, buttonSize, attrs)}</div>
-                    })}
-                </ContentBlock>
-
-                <ContentBlockTitle>Fluid Buttons</ContentBlockTitle>
-                <ContentBlock inner>
-                    {/*Fluid buttons */}
-                    {this.state.buttons.sizes.map((buttonSize, at) => {
-                        const attrs = { fluid: true, key: at + 1, size: buttonSize, color: this.getRandomColor() };
-                        return <div key={attrs.key}>{this.renderButton(attrs.color, buttonSize, attrs)}</div>
-                    })}
-                </ContentBlock>
             </Page>
         );
     }
