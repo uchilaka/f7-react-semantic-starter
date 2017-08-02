@@ -18,18 +18,87 @@ class SemanticKitchenSinkView extends React.Component {
     constructor(props, context) {
         super(props, context);
         this.state = {
+            colorHistory: [],
             colors: 'red orange yellow olive green teal blue violet purple pink brown grey black facebook instagram linkedin twitter vk youtube'.split(' '),
             buttons: {
                 sizes: 'mini tiny small medium large big huge massive'.split(' ')
+            },
+            buttonsToRender: {
+                basic: [],
+                fluid: [],
+                default: []
             }
         };
         this.state.colors.push('google plus');
+        // build buttons 
+        let buttonStyles = Object.keys(this.state.buttonsToRender);
+        let colorHistory = [];
+        const _c = this;
+
+        const pickRandomizedUniqueIn10SampleColor = () => {
+            let pickedColor = _c.getRandomColor();
+            // reference current value for history
+            let history = colorHistory.slice(0);
+            if (history.length) {
+                // last 10 elements in sequence
+                let historySample = history.slice(-10);
+                //console.info('Color history sample -> %o', historySample);
+                while (historySample.indexOf(pickedColor) > -1) {
+                    pickedColor = _c.getRandomColor();
+                }
+            }
+            history.push(pickedColor);
+            // update color history
+            colorHistory = history;
+            // update state in constructor (not using setState)
+            return pickedColor;
+        };
+
+        let buildButtonJobs = [];
+
+        buttonStyles.forEach((style) => {
+            buildButtonJobs.push(new Promise((yep, nope) => {
+                // go through button sizes and colors 
+                this.state.buttons.sizes.forEach((buttonSize, at) => {
+                    const newButton = {
+                        key: at + 1,
+                        size: buttonSize,
+                        color: pickRandomizedUniqueIn10SampleColor()
+                    };
+                    newButton[style] = true;
+                    // add button
+                    this.state.buttonsToRender[style].push(newButton);
+                    return yep(newButton);
+                });
+            }));
+        });
+        Promise.all(buildButtonJobs)
+            .then(() => {
+                console.info('Color history -> %o', colorHistory);
+                console.info('Built buttons -> %o', this.state.buttonsToRender);
+            });
     }
 
     getRandomColor() {
         return this.state.colors[Math.round(Math.random() * (this.state.colors.length - 1))];
     }
-
+    /*
+    pickRandomizedUniqueColor() {
+        let pickedColor = this.getRandomColor();
+        let history = this.state.colorHistory.slice(0);
+        if (history.length) {
+            let historySample = history.slice(-11, -1);
+            console.info('Color history -> %o', history);
+            console.info('Color history sample -> %o', historySample);
+            while (historySample.indexOf(pickedColor) > -1) {
+                pickedColor = this.getRandomColor();
+            }
+        }
+        history.push(pickedColor);
+        this.setState({ colorHistory: history });
+        return pickedColor;
+    }
+    */
     renderButton(color, size, attrs) {
         return (
             <Button {...attrs}>{color.toUpperCase()} {size} button</Button>
