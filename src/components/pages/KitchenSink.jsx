@@ -25,6 +25,7 @@ export default class KitchenSinkView extends React.Component {
                 </ContentBlock>
                 <ContentBlockTitle>Buttons</ContentBlockTitle>
                 <ContentBlock inner>
+
                 </ContentBlock>
             </Page>
         );

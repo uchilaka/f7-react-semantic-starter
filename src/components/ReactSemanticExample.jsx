@@ -17,7 +17,8 @@ import {
 
 import { routes } from '../routes';
 
-import { Home } from './pages/Home';
+import { SemanticKitchenSink } from './pages/SemanticKitchenSink';
+//import { Home } from './pages/Home';
 //import { KitchenSink } from './pages/KitchenSink';
 //import { About } from './pages/About';
 import 'semantic-ui-css/semantic.min.css';
@@ -36,7 +37,7 @@ const MainViews = (props, context) => {
                 </Navbar>
                 <Pages>
                     {/*Default or Home page*/}
-                    <Home />
+                    <SemanticKitchenSink />
                 </Pages>
             </View>
         </Views>

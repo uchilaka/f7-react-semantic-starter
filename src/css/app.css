@@ -8,6 +8,9 @@ Your custom styles go here
   /* default `box-sizing` is: content-box */
   margin-left: 0px;
 }
-.button {
+.ui.button {
   height: unset;
+}
+.ui.button.fluid {
+  margin-bottom: 5px;
 }

@@ -8,7 +8,7 @@ import {
     Container,
     Button
 } from 'semantic-ui-react';
-import { getCurrentRoute, getFramework7 } from '../ReactSemanticExample';
+import { getFramework7 } from '../ReactSemanticExample';
 
 export const Home = (props, context) => (
     <Page>
@@ -24,6 +24,11 @@ export const Home = (props, context) => (
                 size="huge"
                 color="yellow"
                 onClick={() => { alert("A button was clicked!"); getFramework7().mainView.router.loadPage('/kitchen-sink/'); }}>View Kitchen Sink</Button>
+            <Button
+                fluid
+                size="big"
+                color="purple"
+                onClick={() => { getFramework7().mainView.router.loadPage('/semantic-kitchen-sink/') }}>Semantic UI Kitchen Sink</Button>
         </Container>
     </Page>
 );
